@@ -20,7 +20,7 @@
   text-decoration: none;
 }
 
-.Note__content a:hover {
+.Note a:hover {
   text-decoration: underline;
 }
 

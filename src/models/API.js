@@ -12,6 +12,33 @@ class API {
     this.baseURL = baseURL;
   }
 
+  getNote(slug) {
+    return new Promise((resolve, reject) => {
+      fetch(`${this.baseURL}/notes/${slug}/`)
+        .then(response => {
+          if (response.ok) {
+            response.json().then(n => {
+              resolve(
+                new Note(
+                  n._id,
+                  n.created,
+                  n.slug,
+                  n.text,
+                  n.html,
+                  n.location,
+                  n.location_friendly
+                )
+              );
+            });
+          } else {
+            // TODO: Add message from API if available
+            reject(new APIError(response.status));
+          }
+        })
+        .catch(e => reject(e)); // Return native JS Error
+    });
+  }
+
   getNotes() {
     return new Promise((resolve, reject) => {
       fetch(`${this.baseURL}/notes/`)

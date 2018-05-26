@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
-import API from './models/API';
-import Note from './views/Note';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';
+import Notes from './controllers/Notes';
+import Note from './controllers/Note';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      notes: []
-    };
-
-    this.api = new API();
-  }
-
-  componentDidMount() {
-    // Fetch notes from the API
-    this.api.getNotes().then(notes => {
-      this.setState({ notes });
-    });
-  }
-
   render() {
     return (
-      <div className="App">
-        {this.state.notes.map(n => <Note key={n.id} {...n} />)}
-      </div>
+      <Switch>
+        <div>
+          <Route exact path="/" component={() => <Notes />} />
+          <Route
+            exact
+            path="/notes/:slug"
+            component={props => <Note {...props} />}
+          />
+        </div>
+      </Switch>
     );
   }
 }
