@@ -1,7 +1,8 @@
 class Note {
-  constructor(id, text) {
+  constructor(id, text = '', html = '<p></p>') {
     this.id = id;
-    this.text = text || '';
+    this.text = text;
+    this.html = html;
   }
 }
 
