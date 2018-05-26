@@ -15,7 +15,7 @@
   margin-bottom: 0px;
 }
 
-.Note__content a {
+.Note a {
   color: #0975ef;
   text-decoration: none;
 }
@@ -40,6 +40,10 @@
 
 .Note__info a {
   color: inherit;
+}
+
+.Note__info__permalink {
+  float: right;
 }
 
 @media screen and (min-width: 320px) and (max-width: 414px) {

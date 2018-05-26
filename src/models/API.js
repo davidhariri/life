@@ -18,7 +18,20 @@ class API {
         .then(response => {
           if (response.ok) {
             response.json().then(d => {
-              resolve(d.notes.map(n => new Note(n._id, n.text, n.html)));
+              resolve(
+                d.notes.map(
+                  n =>
+                    new Note(
+                      n._id,
+                      n.created,
+                      n.slug,
+                      n.text,
+                      n.html,
+                      n.location,
+                      n.location_friendly
+                    )
+                )
+              );
             });
           } else {
             // TODO: Add message from API if available
