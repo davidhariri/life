@@ -1,5 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  background: #ffffff;
+  color: #3c4147;
+  font-size: 16px;
+  line-height: 16px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+@media screen and (min-width: 320px) and (max-width: 414px) {
+  body {
+    overflow: hidden;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    -webkit-scroll-snap-type: mandatory;
+  }
 }

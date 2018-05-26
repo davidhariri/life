@@ -1,0 +1,53 @@
+.Note {
+  min-height: 320px;
+  padding: 80px 16px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.Note__content p {
+  font-size: 19px;
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+
+.Note__content p:last-child {
+  margin-bottom: 0px;
+}
+
+.Note a {
+  color: #0975ef;
+  text-decoration: none;
+}
+
+.Note a:hover {
+  text-decoration: underline;
+}
+
+.Note__content img,
+.Note__content video {
+  width: 100%;
+  display: block;
+  margin: 8px 0;
+}
+
+.Note__info {
+  margin-top: 7px;
+  font-size: 13px;
+  color: #cdcdd0;
+  width: 100%;
+}
+
+.Note__info a {
+  color: inherit;
+}
+
+.Note__info__permalink {
+  float: right;
+}
+
+@media screen and (min-width: 320px) and (max-width: 414px) {
+  .Note {
+    -webkit-scroll-snap-coordinate: 0% 0%;
+  }
+}
