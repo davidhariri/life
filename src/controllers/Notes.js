@@ -23,7 +23,9 @@ class Notes extends Component {
   render() {
     return (
       <div className="Notes">
-        {this.state.notes.map(n => <Note key={n.id} {...n} />)}
+        {this.state.notes.map(n => (
+          <Note key={n.id} {...n} />
+        ))}
       </div>
     );
   }

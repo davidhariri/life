@@ -15,8 +15,8 @@ class Notes extends Component {
 
   componentDidMount() {
     // Fetch notes from the API
-    this.api.getNote(this.props.match.params.slug).then(note => {
-      this.setState({ note });
+    this.api.getNote(this.props.match.params.slug).then(notes => {
+      this.setState({ note: notes[0] });
     });
   }
 
