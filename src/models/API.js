@@ -8,8 +8,9 @@ class APIError {
 }
 
 class API {
-  constructor(baseURL = 'https://api.dhariri.com') {
+  constructor(authToken, baseURL = 'https://cdn.contentful.com') {
     this.baseURL = baseURL;
+    this.authToken = authToken;
   }
 
   getNote(slug) {
