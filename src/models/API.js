@@ -44,7 +44,8 @@ class API {
 
   getNotes() {
     return this.makePromiseFromEntriesQuery({
-      content_type: this.noteContentID
+      content_type: this.noteContentID,
+      order: '-fields.dateCreated'
     });
   }
 }
