@@ -20,7 +20,8 @@ class API {
         e.fields.dateCreated || e.sys.createdAt,
         e.fields.textContent,
         [e.fields.location.lat, e.fields.location.lon],
-        e.fields.place
+        e.fields.place,
+        e.fields.images
       );
     });
   }
