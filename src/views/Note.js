@@ -12,9 +12,33 @@ class Note extends Component {
   }
 
   renderMedia() {
+    if (!this.props.images) {
+      return undefined;
+    }
+
     return this.props.images.map(i => (
       <img src={i.fields.file.url + '?w=800'} alt={i.fields.description} />
     ));
+  }
+
+  renderLocation() {
+    if (!this.props.location) {
+      return undefined;
+    }
+
+    return (
+      <span>
+        &nbsp;—&nbsp;
+        <a
+          class="Note__info__location"
+          href={`http://maps.apple.com/?ll=${this.props.location[0]},${
+            this.props.location[1]
+          }`}
+        >
+          {this.props.location_friendly}
+        </a>
+      </span>
+    );
   }
 
   render() {
@@ -26,14 +50,8 @@ class Note extends Component {
           {this.renderMedia()}
         </div>
         <div className="Note__info">
-          {this.renderCreatedDate()} —{' '}
-          <a
-            href={`http://maps.apple.com/?ll=${this.props.location[0]},${
-              this.props.location[1]
-            }`}
-          >
-            {this.props.location_friendly}
-          </a>
+          {this.renderCreatedDate()}
+          {this.renderLocation()}
           <Link
             className="Note__info__permalink"
             to={`/notes/${this.props.id}/`}

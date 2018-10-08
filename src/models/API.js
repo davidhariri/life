@@ -15,13 +15,31 @@ class API {
 
   createNotesFromContentfulEntries(entries) {
     return entries.map(e => {
+      var location = null;
+
+      if (e.fields.location !== undefined) {
+        location = [e.fields.location.lat, e.fields.location.lon];
+      }
+
+      var place = null;
+
+      if (e.fields.place !== undefined) {
+        place = e.fields.place;
+      }
+
+      var images = null;
+
+      if (e.fields.images !== undefined) {
+        images = e.fields.images;
+      }
+
       return new Note(
         e.sys.id,
-        e.fields.dateCreated || e.sys.createdAt,
+        e.sys.createdAt,
         e.fields.textContent,
-        [e.fields.location.lat, e.fields.location.lon],
-        e.fields.place,
-        e.fields.images
+        location,
+        place,
+        images
       );
     });
   }
@@ -45,7 +63,7 @@ class API {
   getNotes() {
     return this.makePromiseFromEntriesQuery({
       content_type: this.noteContentID,
-      order: '-fields.dateCreated'
+      order: '-sys.createdAt'
     });
   }
 }
