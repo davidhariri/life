@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
-import Notes from './controllers/Notes';
-import Note from './controllers/Note';
+import Posts from './controllers/Posts';
+import Post from './controllers/Post';
 
 class App extends Component {
   render() {
     return (
       <Switch>
         <div>
-          <Route exact path="/" component={() => <Notes />} />
+          <Route exact path="/" component={() => <Posts />} />
           <Route
             exact
-            path="/notes/:slug"
-            component={props => <Note {...props} />}
+            path="/posts/:slug"
+            component={props => <Post {...props} />}
           />
         </div>
       </Switch>
