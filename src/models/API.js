@@ -1,69 +1,63 @@
-import Note from './Note';
-import * as contentful from 'contentful';
+import Post from './Post';
+import axios from 'axios';
 
 class API {
-  constructor(authToken, baseURL = 'https://cdn.contentful.com') {
+  constructor(authToken, baseURL = 'https://api.dhariri.com') {
     this.baseURL = baseURL;
-    this.authToken = authToken;
-    this.contentfulClient = contentful.createClient({
-      space: '7gys616l8vcm',
-      accessToken:
-        '485ac0870a61ea2ff9326e105590400cc1654c866bddfa2cfcd244ee544f67a3'
-    });
-    this.noteContentID = 'post';
   }
 
-  createNotesFromContentfulEntries(entries) {
-    return entries.map(e => {
-      var location = null;
-
-      if (e.fields.location !== undefined) {
-        location = [e.fields.location.lat, e.fields.location.lon];
-      }
-
-      var place = null;
-
-      if (e.fields.place !== undefined) {
-        place = e.fields.place;
-      }
-
-      var images = null;
-
-      if (e.fields.images !== undefined) {
-        images = e.fields.images;
-      }
-
-      return new Note(
-        e.sys.id,
-        e.sys.createdAt,
-        e.fields.textContent,
-        location,
-        place,
-        images
-      );
-    });
-  }
-
-  makePromiseFromEntriesQuery(query) {
+  getPost(id) {
     return new Promise((resolve, reject) => {
-      this.contentfulClient.getEntries(query).then(response => {
-        resolve(this.createNotesFromContentfulEntries(response.items));
-      });
+      axios
+        .get(`${this.baseURL}/posts/${id}/`)
+        .then(response => {
+          const p = response.data;
+
+          resolve([
+            new Post(
+              p.id,
+              p.slug,
+              p.comment,
+              p.date_created,
+              p.date_updated,
+              p.location_lat,
+              p.location_lon,
+              p.location_name,
+              p.media
+            )
+          ]);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     });
   }
 
-  getNote(id) {
-    return this.makePromiseFromEntriesQuery({
-      content_type: this.noteContentID,
-      limit: 1,
-      'sys.id': id
-    });
-  }
-
-  getNotes() {
-    return this.makePromiseFromEntriesQuery({
-      content_type: this.noteContentID,
-      order: '-sys.createdAt'
+  getPosts() {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${this.baseURL}/posts/`)
+        .then(response => {
+          resolve(
+            response.data.posts.map(
+              p =>
+                new Post(
+                  p.id,
+                  p.slug,
+                  p.comment,
+                  p.date_created,
+                  p.date_updated,
+                  p.location_lat,
+                  p.location_lon,
+                  p.location_name,
+                  p.media
+                )
+            )
+          );
+        })
+        .catch(error => {
+          console.log(error);
+        });
     });
   }
 }
