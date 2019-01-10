@@ -23,7 +23,8 @@ class API {
               p.location_lat,
               p.location_lon,
               p.location_name,
-              p.media
+              p.media,
+              p.tweet_id
             )
           ]);
         })
@@ -50,7 +51,8 @@ class API {
                   p.location_lat,
                   p.location_lon,
                   p.location_name,
-                  p.media
+                  p.media,
+                  p.tweet_id
                 )
             )
           );

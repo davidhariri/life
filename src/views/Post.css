@@ -41,8 +41,9 @@
   color: inherit;
 }
 
-.Post__info__permalink {
+.Post__info__right-link {
   float: right;
+  margin-left: 16px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 414px) {

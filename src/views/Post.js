@@ -59,11 +59,24 @@ class Post extends Component {
           {this.renderCreatedDate()}
           {this.renderLocation()}
           <Link
-            className="Post__info__permalink"
+            className="Post__info__right-link"
             to={`/posts/${this.props.slug}/`}
           >
             Link
           </Link>
+          {this.props.show_tweet ? (
+            <a
+              className="Post__info__right-link"
+              href={`https://twitter.com/davehariri/status/${
+                this.props.tweet_id
+              }`}
+              target="_blank"
+            >
+              On Twitter
+            </a>
+          ) : (
+            undefined
+          )}
         </div>
       </div>
     );

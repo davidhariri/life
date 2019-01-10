@@ -8,7 +8,8 @@ class Post {
     location_lat,
     location_lon,
     location_name,
-    media
+    media,
+    tweet_id
   ) {
     this.id = id;
     this.slug = slug;
@@ -19,6 +20,7 @@ class Post {
     this.location_lon = location_lon;
     this.location_name = location_name;
     this.media = media;
+    this.tweet_id = tweet_id;
   }
 }
 
