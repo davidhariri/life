@@ -16,7 +16,7 @@ class Post extends Component {
       return undefined;
     }
 
-    return <p>{this.props.comment}</p>;
+    return this.props.comment.split('\n').map(t => <p>{t}</p>);
   }
 
   renderMedia() {
@@ -24,7 +24,7 @@ class Post extends Component {
       return undefined;
     }
 
-    return this.props.media.map(m => <img src={m} />);
+    return this.props.media.map(m => <img alt="" src={m} />);
   }
 
   renderLocation() {
