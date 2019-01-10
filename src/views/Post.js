@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import './Base.css';
 import './Post.css';
 
 class Post extends Component {
@@ -49,7 +50,7 @@ class Post extends Component {
 
   render() {
     return (
-      <div className="Post">
+      <div className="Inline Post">
         <div className="Post__content">
           {this.renderText()}
           {this.renderMedia()}
