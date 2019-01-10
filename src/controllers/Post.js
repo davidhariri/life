@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../models/API';
 import Post from '../views/Post';
+import Nav from '../views/Nav';
 
 class Posts extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Posts extends Component {
   render() {
     return (
       <div className="Posts">
+        <Nav />
         {this.state.post ? <Post {...this.state.post} /> : undefined}
       </div>
     );
