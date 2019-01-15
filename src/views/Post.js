@@ -17,7 +17,9 @@ class Post extends Component {
       return undefined;
     }
 
-    return this.props.comment.split('\n').map(t => <p>{t}</p>);
+    return this.props.comment.split('\n').map((t, i) => {
+      return <p key={i}>{t}</p>;
+    });
   }
 
   renderMedia() {
@@ -25,7 +27,19 @@ class Post extends Component {
       return undefined;
     }
 
-    return this.props.media.map(m => <img alt="" src={m} />);
+    return this.props.media.map((m, i) => {
+      return (
+        <img
+          style={{
+            backgroundColor: m.avg_color,
+            minHeight: Math.round(448 / m.aspect)
+          }}
+          key={i}
+          alt=""
+          src={m.url_optimized}
+        />
+      );
+    });
   }
 
   renderLocation() {
@@ -37,7 +51,7 @@ class Post extends Component {
       <span>
         &nbsp;—&nbsp;
         <a
-          class="Post__info__location"
+          className="Post__info__location"
           href={`http://maps.apple.com/?ll=${this.props.location_lat},${
             this.props.location_lon
           }`}
