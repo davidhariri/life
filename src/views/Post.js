@@ -67,10 +67,13 @@ class Post extends Component {
                 ? null
                 : `${(1 / m.aspect) * 100}%`
             }}
-            onLoadedData={() => {
+            onLoadedData={e => {
               this.setState({
                 mediaLoaded: true
               });
+            }}
+            onLoadStart={e => {
+              e.target.setAttribute('muted', 'true');
             }}
             key={i}
             alt=""
