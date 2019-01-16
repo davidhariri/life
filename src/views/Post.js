@@ -82,6 +82,7 @@ class Post extends Component {
             loop={true}
             controls={false}
             muted={true}
+            playsInline={true}
             onClick={() => {
               window.open(m.url, '_blank');
             }}
