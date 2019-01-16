@@ -37,7 +37,7 @@ class API {
   getPosts() {
     return new Promise((resolve, reject) => {
       axios
-        .get(`${this.baseURL}/posts/`)
+        .get(`${this.baseURL}/posts/?size=50`)
         .then(response => {
           resolve(
             response.data.posts.map(
