@@ -5,6 +5,14 @@ import './Base.css';
 import './Post.css';
 
 class Post extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mediaLoaded: false
+    };
+  }
+
   renderCreatedDate(ISODate) {
     const _date = moment(this.props.date_created);
     const humanDateFormat = _date.format('MMMM Do YYYY');
@@ -28,17 +36,55 @@ class Post extends Component {
     }
 
     return this.props.media.map((m, i) => {
-      return (
-        <img
-          style={{
-            backgroundColor: m.avg_color,
-            minHeight: Math.round(448 / m.aspect)
-          }}
-          key={i}
-          alt=""
-          src={m.url_optimized}
-        />
-      );
+      if (m.type === 'jpeg') {
+        return (
+          <img
+            style={{
+              backgroundColor: m.avg_color,
+              paddingBottom: this.state.mediaLoaded
+                ? null
+                : `${(1 / m.aspect) * 100}%`
+            }}
+            onLoad={() => {
+              this.setState({
+                mediaLoaded: true
+              });
+            }}
+            key={i}
+            alt=""
+            src={m.url_optimized}
+            onClick={() => {
+              window.open(m.url, '_blank');
+            }}
+          />
+        );
+      } else {
+        return (
+          <video
+            style={{
+              backgroundColor: m.avg_color,
+              paddingBottom: this.state.mediaLoaded
+                ? null
+                : `${(1 / m.aspect) * 100}%`
+            }}
+            onLoadedData={() => {
+              this.setState({
+                mediaLoaded: true
+              });
+            }}
+            key={i}
+            alt=""
+            src={m.url_optimized}
+            autoPlay={true}
+            loop={true}
+            controls={false}
+            muted={true}
+            onClick={() => {
+              window.open(m.url, '_blank');
+            }}
+          />
+        );
+      }
     });
   }
 
