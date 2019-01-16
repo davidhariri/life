@@ -1,3 +1,5 @@
+import Media from '../models/Media';
+
 class Post {
   constructor(
     id,
@@ -23,7 +25,7 @@ class Post {
     this.tweet_id = tweet_id;
 
     if (this.media != null) {
-      this.media = this.media.map(m => Media(m));
+      this.media = this.media.map(m => new Media(m));
     }
   }
 }

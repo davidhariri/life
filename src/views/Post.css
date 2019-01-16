@@ -28,6 +28,8 @@
   width: 100%;
   display: block;
   margin: 8px 0;
+  z-index: 0;
+  cursor: pointer;
 }
 
 .Post__info {
