@@ -44,7 +44,6 @@ class Post extends Component {
             : `${(1 / m.aspect) * 100}%`
         },
         key: { i },
-        alt: '',
         src: m.url_optimized,
         onClick: () => {
           window.open(m.url, '_blank');
@@ -61,6 +60,7 @@ class Post extends Component {
         case 'png':
           return (
             <img
+              alt=""
               onLoad={() => this.setState(mediaLoadedState)}
               {...commonAttributes}
             />
@@ -69,6 +69,7 @@ class Post extends Component {
         case 'gif':
           return (
             <video
+              alt=""
               onLoadedData={() => this.setState(mediaLoadedState)}
               onLoadStart={e => {
                 e.target.setAttribute('muted', 'true');
