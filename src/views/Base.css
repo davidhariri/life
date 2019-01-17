@@ -4,3 +4,13 @@
   padding-right: 16px;
   padding-left: 16px;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

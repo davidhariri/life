@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import Media from '../views/Media';
 import './Base.css';
 import './Post.css';
 
@@ -9,7 +10,7 @@ class Post extends Component {
     super(props);
 
     this.state = {
-      mediaLoaded: false
+      shouldHide: true
     };
   }
 
@@ -35,58 +36,7 @@ class Post extends Component {
       return undefined;
     }
 
-    return this.props.media.map((m, i) => {
-      const commonAttributes = {
-        style: {
-          backgroundColor: m.avg_color,
-          paddingBottom: this.state.mediaLoaded
-            ? null
-            : `${(1 / m.aspect) * 100}%`
-        },
-        key: { i },
-        src: m.url_optimized,
-        onClick: () => {
-          window.open(m.url, '_blank');
-        }
-      };
-
-      const mediaLoadedState = {
-        mediaLoaded: true
-      };
-
-      switch (m.type) {
-        case 'jpeg':
-        case 'jpg':
-        case 'png':
-          return (
-            <img
-              alt=""
-              onLoad={() => this.setState(mediaLoadedState)}
-              {...commonAttributes}
-            />
-          );
-
-        case 'gif':
-          return (
-            <video
-              alt=""
-              onLoadedData={() => this.setState(mediaLoadedState)}
-              onLoadStart={e => {
-                e.target.setAttribute('muted', 'true');
-              }}
-              autoPlay={true}
-              loop={true}
-              controls={false}
-              muted={true}
-              playsInline={true}
-              {...commonAttributes}
-            />
-          );
-
-        default:
-          return undefined;
-      }
-    });
+    return this.props.media.map((m, i) => <Media key={i} {...m} />);
   }
 
   renderLocation() {
@@ -109,9 +59,15 @@ class Post extends Component {
     );
   }
 
+  componentDidMount() {
+    this.setState({ shouldHide: false });
+  }
+
   render() {
     return (
-      <div className="Inline Post">
+      <div
+        className={`Inline Post ${this.state.shouldHide ? 'Post--hidden' : ''}`}
+      >
         <div className="Post__content">
           {this.renderText()}
           {this.renderMedia()}

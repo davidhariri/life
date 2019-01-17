@@ -1,0 +1,37 @@
+.Media__wrapper {
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  min-height: 32px;
+  width: 100%;
+  margin: 8px 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.Media__wrapper img,
+.Media__wrapper video {
+  width: 100%;
+  position: absolute;
+  transition: 200ms opacity ease;
+  transform: scale(1.005);
+}
+
+.Media__wrapper img.hidden,
+.Media__wrapper video.hidden {
+  opacity: 0;
+}
+
+/*
+
+.Post__content img,
+.Post__content video {
+  width: 100%;
+  display: block;
+  margin: 8px 0;
+  z-index: 0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+*/

@@ -2,6 +2,8 @@
   min-height: 320px;
   padding-top: 80px;
   padding-bottom: 80px;
+  animation-name: fadeIn;
+  animation-duration: 1s;
 }
 
 .Post__content p {
@@ -21,15 +23,6 @@
 
 .Post a:hover {
   text-decoration: underline;
-}
-
-.Post__content img,
-.Post__content video {
-  width: 100%;
-  display: block;
-  margin: 8px 0;
-  z-index: 0;
-  cursor: pointer;
 }
 
 .Post__info {
