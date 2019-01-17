@@ -36,58 +36,54 @@ class Post extends Component {
     }
 
     return this.props.media.map((m, i) => {
-      if (m.type === 'jpeg') {
-        return (
-          <img
-            style={{
-              backgroundColor: m.avg_color,
-              paddingBottom: this.state.mediaLoaded
-                ? null
-                : `${(1 / m.aspect) * 100}%`
-            }}
-            onLoad={() => {
-              this.setState({
-                mediaLoaded: true
-              });
-            }}
-            key={i}
-            alt=""
-            src={m.url_optimized}
-            onClick={() => {
-              window.open(m.url, '_blank');
-            }}
-          />
-        );
-      } else {
-        return (
-          <video
-            style={{
-              backgroundColor: m.avg_color,
-              paddingBottom: this.state.mediaLoaded
-                ? null
-                : `${(1 / m.aspect) * 100}%`
-            }}
-            onLoadedData={e => {
-              this.setState({
-                mediaLoaded: true
-              });
-            }}
-            onLoadStart={e => {
-              e.target.setAttribute('muted', 'true');
-            }}
-            key={i}
-            alt=""
-            src={m.url_optimized}
-            autoPlay={true}
-            loop={true}
-            controls={false}
-            muted={true}
-            playsInline={true}
-            onClick={() => {
-              window.open(m.url, '_blank');
-            }}
-          />
-        );
+      const commonAttributes = {
+        style: {
+          backgroundColor: m.avg_color,
+          paddingBottom: this.state.mediaLoaded
+            ? null
+            : `${(1 / m.aspect) * 100}%`
+        },
+        key: { i },
+        alt: '',
+        src: m.url_optimized,
+        onClick: () => {
+          window.open(m.url, '_blank');
+        }
+      };
+
+      const mediaLoadedState = {
+        mediaLoaded: true
+      };
+
+      switch (m.type) {
+        case 'jpeg':
+        case 'jpg':
+        case 'png':
+          return (
+            <img
+              onLoad={() => this.setState(mediaLoadedState)}
+              {...commonAttributes}
+            />
+          );
+
+        case 'gif':
+          return (
+            <video
+              onLoadedData={() => this.setState(mediaLoadedState)}
+              onLoadStart={e => {
+                e.target.setAttribute('muted', 'true');
+              }}
+              autoPlay={true}
+              loop={true}
+              controls={false}
+              muted={true}
+              playsInline={true}
+              {...commonAttributes}
+            />
+          );
+
+        default:
+          return undefined;
       }
     });
   }
